@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Monochrome, one colour, no gradients: a symbolic icon is recoloured by the
+     theme and anything else in it survives as a blob. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+  <g fill="#222222">
+    <path d="M11 2.5a5.5 5.5 0 0 1 0 11 5.5 5.5 0 0 1-1.2-.13V12.3a4.5 4.5 0 1 0 0-8.6V2.63A5.5 5.5 0 0 1 11 2.5z"/>
+    <circle cx="11" cy="8" r="1.5"/>
+    <path d="M2 2h8v1.2H3.2v9.6H10V14H2a.8.8 0 0 1-.8-.8V2.8A.8.8 0 0 1 2 2z"/>
+    <path d="M4.4 4.6h3.2v1.2H4.4zM4.4 7h3.2v1.2H4.4z"/>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="ui-root">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Qobuz</title>
+        <meta name="description" content="Listen to your music in high quality">
+        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval' data: blob:">
+        <link type="text/css" rel="stylesheet" href="/legacy/assets/css/legacy.css">
+        <link type="text/css" rel="stylesheet" href="/assets/css/main.css">
+    </head>
+    <body class="ui-root">
+        <script>
+            /*! Obs.js 0.2.1 | (c) Harry Roberts, csswizardry.com | MIT */
+            ;(()=>{const e=document.currentScript;if((!e||e.src||e.type&&"module"===e.type.toLowerCase())&&!1===/^(localhost|127\.0\.0\.1|::1)$/.test(location.hostname))return void console.warn("[Obs.js] Skipping: must be an inline, classic <script> in <head>.",e?e.src?"src="+e.src:"type="+e.type:"type=module");const t=document.documentElement,{connection:i}=navigator;window.obs=window.obs||{};const a=!0===(window.obs&&window.obs.config||{}).observeChanges,o=()=>{const e=window.obs||{},i="number"==typeof e.downlinkBucket?e.downlinkBucket:null;e.connectionCapability="low"===e.rttCategory&&null!=i&&i>=8?"strong":"high"===e.rttCategory||null!=i&&i<=5?"weak":"moderate";const a=!0===e.dataSaver||!0===e.batteryLow||!0===e.batteryCritical;e.conservationPreference=a?"conserve":"neutral";const o="weak"===e.connectionCapability||!0===e.dataSaver||!0===e.batteryCritical;e.deliveryMode="strong"!==e.connectionCapability||o||a?o?"lite":"cautious":"rich",e.canShowRichMedia="lite"!==e.deliveryMode,e.shouldAvoidRichMedia="lite"===e.deliveryMode,["strong","moderate","weak"].forEach(e=>{t.classList.remove(`has-connection-capability-${e}`)}),t.classList.add(`has-connection-capability-${e.connectionCapability}`),["conserve","neutral"].forEach(e=>{t.classList.remove(`has-conservation-preference-${e}`)}),t.classList.add(`has-conservation-preference-${e.conservationPreference}`),["rich","cautious","lite"].forEach(e=>{t.classList.remove(`has-delivery-mode-${e}`)}),t.classList.add(`has-delivery-mode-${e.deliveryMode}`)},n=()=>{if(!i)return;const{saveData:e,rtt:a,downlink:n}=i;window.obs.dataSaver=!!e,t.classList.toggle("has-data-saver",!!e);const s=(e=>Number.isFinite(e)?25*Math.ceil(e/25):null)(a);null!=s&&(window.obs.rttBucket=s);const r=(e=>Number.isFinite(e)?e<75?"low":e<=275?"medium":"high":null)(a);r&&(window.obs.rttCategory=r,["low","medium","high"].forEach(e=>t.classList.remove(`has-latency-${e}`)),t.classList.add(`has-latency-${r}`));const c=(l=n,Number.isFinite(l)?Math.ceil(l):null);var l;if(null!=c){window.obs.downlinkBucket=c;const e=c<=5?"low":c>=8?"high":"medium";window.obs.downlinkCategory=e,["low","medium","high"].forEach(e=>t.classList.remove(`has-bandwidth-${e}`)),t.classList.add(`has-bandwidth-${e}`)}"downlinkMax"in i&&(window.obs.downlinkMax=i.downlinkMax),o()};n(),a&&i&&"function"==typeof i.addEventListener&&i.addEventListener("change",n);const s=e=>{if(!e)return;const{level:i,charging:a}=e,n=Number.isFinite(i)?i<=.05:null;window.obs.batteryCritical=n;const s=Number.isFinite(i)?i<=.2:null;window.obs.batteryLow=s,["critical","low"].forEach(e=>t.classList.remove(`has-battery-${e}`)),s&&t.classList.add("has-battery-low"),n&&t.classList.add("has-battery-critical");const r=!!a;window.obs.batteryCharging=r,t.classList.toggle("has-battery-charging",r),o()};if("getBattery"in navigator&&navigator.getBattery().then(e=>{s(e),a&&"function"==typeof e.addEventListener&&(e.addEventListener("levelchange",()=>s(e)),e.addEventListener("chargingchange",()=>s(e)))}).catch(()=>{}),"deviceMemory"in navigator){const e=Number(navigator.deviceMemory),i=Number.isFinite(e)?e:null;window.obs.ramBucket=i;const a=(r=i,Number.isFinite(r)?r<=1?"very-low":r<=2?"low":r<=4?"medium":"high":null);a&&(window.obs.ramCategory=a,["very-low","low","medium","high"].forEach(e=>t.classList.remove(`has-ram-${e}`)),t.classList.add(`has-ram-${a}`))}var r;if("hardwareConcurrency"in navigator){const e=Number(navigator.hardwareConcurrency),i=Number.isFinite(e)?e:null;window.obs.cpuBucket=i;const a=(e=>Number.isFinite(e)?e<=2?"low":e<=5?"medium":"high":null)(i);a&&(window.obs.cpuCategory=a,["low","medium","high"].forEach(e=>t.classList.remove(`has-cpu-${e}`)),t.classList.add(`has-cpu-${a}`))}(()=>{const e=window.obs||{},i=e.ramCategory,a=e.cpuCategory;let o="moderate";"high"!==i&&"medium"!==i||"high"!==a?("very-low"===i||"low"===i||"low"===a)&&(o="weak"):o="strong",e.deviceCapability=o,["strong","moderate","weak"].forEach(e=>{t.classList.remove(`has-device-capability-${e}`)}),t.classList.add(`has-device-capability-${o}`)})()})();
+            //# sourceURL=obs.inline.js
+        </script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+        </script>
+        <!-- Google Tag Manager -->
+        <script>
+            window.runAsyncGTM = function(){
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+                var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+                j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+                f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-MTLV8X8');
+            };
+        </script>
+
+        <div id="root" class="ui-root"></div>
+
+        <script>window.__ENVIRONMENT__ = 'production';</script>
+        <script src="/resources/8.2.0-b034/bundle.js"></script>
+
+
+        <!-- Algolia ClickAnalyse -->
+        <script>
+        !function(e,a,t,n,s,i,c){e.AlgoliaAnalyticsObject=s,e.aa=e.aa||function(){(e.aa.queue=e.aa.queue||[]).push(arguments)},i=a.createElement(t),c=a.getElementsByTagName(t)[0],i.async=1,i.src="https://cdn.jsdelivr.net/npm/search-insights@1.0.0",c.parentNode.insertBefore(i,c)}(window,document,"script",0,"aa")
+        </script>
+        <!-- Survey Sparrow -->
+        <script>
+        (function(){var e="ss-widget",t="script",a=document,r=window;var s,n,c;r.SS_WIDGET_TOKEN="REDACTED";r.SS_ACCOUNT="qobuz.surveysparrow.com";r.SS_SURVEY_NAME="Qobuz CSAT - Desktop";if(!a.getElementById(e)){var S=function(){S.update(arguments)};S.args=[];S.update=function(e){S.args.push(e)};r.SparrowLauncher=S;s=a.getElementsByTagName(t);c=s[s.length-1];n=a.createElement(t);n.type="text/javascript";n.async=!0;n.id=e;n.src=["https://","qobuz.surveysparrow.com/nps/widget/",r.SS_WIDGET_TOKEN].join("");c.parentNode.insertBefore(n,c)}})();
+        </script>
+    </body>
+</html>

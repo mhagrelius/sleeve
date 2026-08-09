@@ -1,0 +1,33 @@
+Package: sleeve
+Version: @VERSION@
+Architecture: @ARCH@
+Maintainer: Matthew Hagrelius <matthew@hagreli.us>
+Installed-Size: @INSTALLED_SIZE@
+Depends: @DEPENDS@
+Section: sound
+Priority: optional
+Homepage: https://github.com/mhagrelius/sleeve
+Description: Find out where to buy an album
+ Sleeve answers one question: given an album, where should the money go? It is
+ not a "where can I stream this" tool. It ranks the ways of getting a record
+ best-first and shows the arithmetic behind every placement.
+ .
+ Four principles decide the order, and the first two are guaranteed by the sort
+ rather than by the weights: owning DRM-free files beats renting, higher artist
+ payout beats lower, master quality beats format specs, and what actually exists
+ beats what would be ideal. Bit depth and sample rate are tiebreakers only, so a
+ 24-bit/192 kHz stream can never outrank a 16-bit/44.1 kHz purchase.
+ .
+ Search is a first-class part of it, because album and artist names collide
+ constantly — soundtracks and classical worst of all. Sleeve returns a ranked
+ list of candidates rather than guessing, keeps similarly-named records in a
+ separate section, and lets you drill from an album to a specific pressing,
+ since the original and the remaster are different products with different
+ masters.
+ .
+ It consults MusicBrainz, Discogs, Bandcamp, Qobuz, the iTunes Store, Odesli and
+ the Dynamic Range Database. Two of those need credentials, set in
+ ~/.config/sleeve/config.toml; a source that is unconfigured or unreachable
+ leaves a visible "not checked" row rather than quietly shrinking the answer.
+ .
+ Scoring weights, locale and currency are all configurable in the same file.

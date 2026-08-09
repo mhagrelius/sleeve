@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+#
+# Run the whole suite the way CI would, in the order that fails fastest.
+#
+#   ./test.sh            use the current session's display
+#   ./test.sh --headless run under Xvfb and a private D-Bus session
+#
+# No test in here touches the network. The source layer is a pair of pure
+# functions per source and the fixtures under tests/fixtures/ were recorded from
+# the live APIs, so a run is offline and deterministic. If a test ever needs a
+# socket, the seam has been broken rather than the test being unlucky.
+#
+set -euo pipefail
+cd "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# GTK_A11Y=none skips the accessibility bus, a common source of CI hangs.
+# GSETTINGS_BACKEND=memory keeps tests from touching real user state.
+export GTK_A11Y=none
+export GSETTINGS_BACKEND=memory
+export RUST_BACKTRACE=1
+
+# The model tests need no display and are the bulk of the suite; only the
+# preview example wants one.
+run=(cargo test --all-targets)
+if [[ "${1:-}" == "--headless" ]]; then
+  command -v xvfb-run >/dev/null || { echo "install xvfb first" >&2; exit 1; }
+
+  # The private bus activates its own xdg-document-portal, which mounts a FUSE
+  # fs at $XDG_RUNTIME_DIR/doc. Inheriting the login session's runtime dir means
+  # that mount lands on /run/user/$UID/doc, on top of the real portal's; the real
+  # one exits 21 and every flatpak launch fails until it is restarted. Hand the
+  # session a throwaway runtime dir so its portals stay inside it.
+  runtime_dir="$(mktemp -d)"
+  chmod 700 "$runtime_dir"
+  trap 'rc=$?; fusermount3 -u "$runtime_dir/doc" 2>/dev/null || :; rm -rf "$runtime_dir"; exit $rc' EXIT
+  export XDG_RUNTIME_DIR="$runtime_dir"
+
+  run=(xvfb-run -a dbus-run-session -- cargo test --all-targets)
+fi
+
+echo "==> cargo fmt --check"
+cargo fmt --check
+
+echo "==> cargo clippy"
+cargo clippy --all-targets -- -D warnings
+
+echo "==> ${run[*]}"
+"${run[@]}"
+
+echo
+echo "All checks passed."

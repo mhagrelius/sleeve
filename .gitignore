@@ -1,0 +1,5 @@
+/target
+/dist
+/.flatpak-build
+/packaging/flatpak/cargo-sources.json
+/.claude/settings.local.json

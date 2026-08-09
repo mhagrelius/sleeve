@@ -1,0 +1,131 @@
+# Sleeve configuration.
+#
+# Nothing here is required. Sleeve works with this file untouched — every source
+# it needs to give a useful answer is keyless, including the shops that have no
+# public API, which are reached through MusicBrainz's purchase links.
+#
+# The keys below only ever *add* to what you get. An empty one means that source
+# is skipped and said so in the "Not checked" section, never that the answer is
+# quietly worse than it looks.
+
+# Which storefront to ask. Decides prices, availability, and what comes back as
+# region-locked. ISO 3166-1 alpha-2.
+locale = "GB"
+
+# Which currency to ask for, where a source lets you choose. Prices are never
+# converted — a converted price is a guess about an exchange rate shown as a
+# fact about a shop.
+currency = "GBP"
+
+# Optional, and off by default on purpose.
+#
+# Whatever is here goes out in the User-Agent of every request, to all eight
+# sources. Left empty, Sleeve identifies itself with its project URL, which is a
+# way to make contact — issues can be filed there — and which both MusicBrainz
+# and Discogs accept. That is the private option and it is the default.
+#
+# Fill it in only if you would rather they mail you directly about your own
+# traffic than raise it against the project. Do not put a made-up address here:
+# an unreachable contact is worse than none, because the fallback at least
+# reaches somebody.
+contact = ""
+
+# Whether Spotify serves lossless where you are. It reached Premium subscribers
+# in 50-plus markets from September 2025. True puts Spotify in tier C, false in
+# tier D; its artist payout stays at zero either way, so it sorts below Qobuz
+# and Tidal regardless.
+spotify_lossless = true
+
+[keys]
+# Optional. Discogs answers unauthenticated at 25 requests a minute; a token
+# raises that to 60 and changes nothing else. Physical pressings and marketplace
+# prices work either way.
+# From https://www.discogs.com/settings/developers.
+discogs_token = ""
+
+# Optional, and only worth setting if you subscribe to Qobuz.
+#
+# Sleeve already knows *whether* Qobuz sells an album, from MusicBrainz's
+# purchase links — no account needed. These two only add the price to that row.
+#
+# Their catalogue refuses an app id on its own with `401 User authentication is
+# required`, so both are needed together or neither does anything. To get them:
+# log in at https://play.qobuz.com, open DevTools, and read `localStorage` key
+# `localuser.token`. Leave qobuz_app_id empty and Sleeve reads one out of the web
+# player itself. Sleeve only reads the catalogue; it never calls the endpoints
+# that mint download URLs.
+qobuz_app_id = ""
+qobuz_user_token = ""
+
+# 7digital's API moved behind a commercial partner agreement when Songtradr
+# bought them, so there is no self-serve key to apply for. Empty means the
+# source is skipped rather than tried and reported as broken.
+sevendigital_key = ""
+
+# --------------------------------------------------------------------------
+# Scoring.
+#
+# The defaults are shown. Delete a line to keep its default; the values below
+# are exactly what Sleeve uses if this whole section is absent.
+# --------------------------------------------------------------------------
+[weights]
+
+# How the ranking is ordered.
+#
+#   "lexicographic" — sort by tier first, then by score inside the tier. The
+#     default. Owning beats renting and higher payout beats lower are then
+#     guaranteed by the sort rather than by the arithmetic happening to work
+#     out, and no override below can invert them.
+#
+#   "numeric" — sort by total score alone. This is what the score table
+#     literally describes, and it permits inversions: a tier-B purchase of a
+#     brickwalled master scores 45, a tier-C lossless stream of a good one
+#     scores 49, and the stream wins.
+ordering = "lexicographic"
+
+# Base score per tier: A, B, C, D, E.
+#   A  DRM-free purchase, lossless
+#   B  DRM-free purchase, lossy
+#   C  Subscription streaming, lossless
+#   D  Subscription streaming, lossy
+#   E  Not legitimately available
+base = [100, 50, 30, 10, 0]
+
+# Format. Deliberately small — these are tiebreakers and must never outweigh
+# tier or payout.
+lossless = 5
+bit_depth_24 = 2
+above_48khz = 0        # No bonus. It is not audibly better.
+
+# Master quality, from the Dynamic Range Database. A missing entry is neutral
+# and never a penalty.
+dr_high = 8
+dr_low = -5
+dr_high_threshold = 10
+dr_low_threshold = 6
+
+# Friction. Region-locking is deliberately not here: an offer you cannot buy is
+# moved out of the ranking entirely rather than docked a few points.
+requires_ripping = -3
+boxset_only = -5
+
+# Artist payout. A vendor left out of this table scores zero.
+[weights.payout]
+bandcamp = 15          # ~82-90% reaches the artist
+qobuz_store = 5
+bleep = 5
+boomkat = 5
+presto = 5
+sevendigital = 5
+hdtracks = 5
+beatport = 5
+physical_new = 3       # Pays a label, and through it the artist
+physical_used = 0      # Resale pays the artist nothing
+itunes = 0
+qobuz = 4              # Highest per-stream rate
+tidal = 3
+apple_music = 1
+amazon_music_hd = 1
+deezer = 1
+spotify = 0
+youtube_music = 0

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>us.hagreli.Sleeve</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>Sleeve</name>
+  <summary>Find out where to buy an album</summary>
+
+  <description>
+    <p>
+      Sleeve answers one question: given an album, where should the money go?
+      It is not a "where can I stream this" tool. It ranks the ways of getting a
+      record best-first, and shows the arithmetic behind every placement.
+    </p>
+    <p>Four principles decide the order, and the first two are guaranteed by the sort rather than by the weights:</p>
+    <ul>
+      <li>Owning DRM-free files beats renting. A purchase outranks any stream, always.</li>
+      <li>Higher artist payout beats lower.</li>
+      <li>Master quality beats format specs. Bit depth and sample rate are tiebreakers only.</li>
+      <li>Actually available beats theoretically ideal.</li>
+    </ul>
+    <p>
+      Search is a first-class part of it, because album and artist names collide
+      constantly. Sleeve returns a ranked list of candidates rather than guessing,
+      keeps similarly-named records in their own section, and lets you drill from
+      an album to the specific pressing — the original, the remaster, the deluxe
+      edition — because those are different products with different masters.
+    </p>
+    <p>
+      It consults MusicBrainz, Discogs, Bandcamp, Qobuz, the iTunes Store, Odesli
+      and the Dynamic Range Database. A source that fails leaves a visible "not
+      checked" row rather than quietly shrinking the answer.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">us.hagreli.Sleeve.desktop</launchable>
+  <url type="homepage">https://github.com/mhagrelius/sleeve</url>
+  <url type="bugtracker">https://github.com/mhagrelius/sleeve/issues</url>
+
+  <developer id="us.hagreli">
+    <name>Matthew Hagrelius</name>
+  </developer>
+
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+  </supports>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+    <internet>always</internet>
+  </requires>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-08-02">
+      <description>
+        <p>First release.</p>
+      </description>
+    </release>
+  </releases>
+</component>

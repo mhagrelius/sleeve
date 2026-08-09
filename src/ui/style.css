@@ -1,0 +1,59 @@
+/* Sleeve.
+ *
+ * Colours come from libadwaita's variables rather than from hex values, so the
+ * tier badges follow the system accent and both colour schemes without a second
+ * stylesheet. */
+
+.sleeve {
+  background: var(--card-shade-color);
+  border-radius: 6px;
+}
+
+/* The tier letter beside each result. Tier is the primary sort key, so it earns
+ * the one piece of colour on the page; everything else is typography. */
+.tier-badge {
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.tier-a {
+  background: var(--success-bg-color);
+  color: var(--success-fg-color);
+}
+
+.tier-b,
+.tier-c {
+  background: var(--accent-bg-color);
+  color: var(--accent-fg-color);
+}
+
+.tier-d,
+.tier-e {
+  background: var(--card-shade-color);
+  color: var(--window-fg-color);
+}
+
+/* The recommendation card. A left border rather than a fill: it sits above a
+ * list of cards and a second filled block would compete with them. */
+.verdict {
+  padding: 16px;
+}
+
+.verdict-good,
+.verdict-fair,
+.verdict-poor {
+  border-left: 4px solid var(--card-shade-color);
+}
+
+.verdict-good {
+  border-left-color: var(--success-color);
+}
+
+.verdict-fair {
+  border-left-color: var(--accent-color);
+}
+
+.verdict-poor {
+  border-left-color: var(--warning-color);
+}

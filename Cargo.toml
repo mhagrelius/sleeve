@@ -1,0 +1,59 @@
+[package]
+name = "sleeve"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.80"
+description = "Where to buy an album, ranked best-first"
+license = "GPL-3.0-or-later"
+
+[[bin]]
+name = "sleeve"
+path = "src/main.rs"
+
+[lib]
+name = "sleeve"
+path = "src/lib.rs"
+
+[dependencies]
+gtk = { package = "gtk4", version = "0.11", features = ["v4_22"] }
+adw = { package = "libadwaita", version = "0.9", features = ["v1_9"] }
+# Direct dependency purely to raise the API level above what gtk4 pulls in.
+# The cover cache reads and writes with the v2_80 GFile async signatures, and
+# ApplicationCommandLine::print_literal is gated behind it. Leave it.
+gio = { version = "0.22", features = ["v2_80"] }
+serde = { version = "1", features = ["derive"] }
+# Every source but one answers in JSON, and most of those answers are deeply
+# optional and irregular — MusicBrainz omits whole fields rather than nulling
+# them, and Bandcamp's mobile endpoints are undocumented. Responses are read out
+# of a `serde_json::Value` by hand rather than derived into structs that would
+# reject a field that got renamed upstream.
+serde_json = "1"
+# The config file format. Weight overrides are the point of it: a table of
+# integers a person edits by hand reads far better in TOML than in the JSON the
+# sibling apps use for machine-written state.
+toml = "1"
+# Local re-ranking of MusicBrainz search results. This is the Rust port of the
+# same library by the same author, so the scoring behaviour matches what the
+# Python original would give.
+rapidfuzz = "0.5"
+# Metadata and price caching with TTLs. libsqlite3 is already on every target
+# and inside org.gnome.Sdk, so this binds a platform library rather than adding
+# a store. The sibling apps keep state in a JSON file rewritten whole; that
+# pattern does not survive this workload, where one search touches dozens of
+# cache keys across eight sources and writes most of them back.
+rusqlite = "0.40"
+# The Dynamic Range Database is the one source with no JSON at all: its answer
+# is an HTML table. A regex over that table would fail by yielding a *wrong* DR
+# number rather than no number, and a wrong DR value moves a ranking by up to 13
+# points. This is the one place where silent wrongness is worse than a
+# dependency.
+scraper = "0.24"
+# The platform's HTTP client. It ships in org.gnome.Sdk, so the Flatpak needs no
+# extra module, and its async calls complete on the GLib main loop — so eight
+# sources answering at eight different speeds need no threads and no channels.
+# Needs `libsoup-3.0-dev` to build. Same call Magpie, Familiar and Scribe make.
+soup = { package = "soup3", version = "0.9" }
+
+[dev-dependencies]
+adw = { package = "libadwaita", version = "0.9", features = ["v1_9"] }
+tempfile = "3"

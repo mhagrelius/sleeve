@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Name=Sleeve
+GenericName=Album Buying Guide
+Comment=Find out where to buy an album, ranked best first
+# One main category only. Audio is the main one; Music qualifies it. Listing two
+# main categories makes the app appear twice in the menu.
+Categories=AudioVideo;Audio;Music;GNOME;GTK;
+Keywords=album;music;buy;purchase;bandcamp;qobuz;flac;lossless;vinyl;discogs;musicbrainz;
+Exec=sleeve
+Icon=us.hagreli.Sleeve
+Terminal=false
+StartupNotify=true
+# Must match the application ID so the shell associates windows with this entry.
+StartupWMClass=us.hagreli.Sleeve
